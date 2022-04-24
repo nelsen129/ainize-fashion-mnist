@@ -4,6 +4,6 @@ WORKDIR /app
 
 RUN pip install flask tensorflow Pillow
 
-COPY backend .
+COPY . /app
 
 CMD ["python3", "app.py"]

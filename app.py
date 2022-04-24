@@ -9,7 +9,7 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
-model = keras.models.load_model('model/Fashion-MNIST/model.h5')
+model = keras.models.load_model('./Fashion-MNIST/model.h5')
 
 
 def predict_class(image):
