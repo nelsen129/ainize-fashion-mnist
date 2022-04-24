@@ -1,5 +1,9 @@
-FROM tensorflow/tensorflow:2.6.1-gpu
+FROM pnelsen129/fashion-mnist:1
 
 WORKDIR /app
 
-COPY /Fashion-MNIST ./Fashion-MNIST
+RUN pip install flask tensorflow Pillow
+
+COPY backend .
+
+CMD ["python3", "app.py"]
