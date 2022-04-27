@@ -5,7 +5,6 @@ from PIL import Image
 
 from flask import Flask, request, jsonify, abort
 import tensorflow.keras as keras
-import tensorflow as tf
 
 app = Flask(__name__)
 
