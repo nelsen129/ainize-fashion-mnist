@@ -1,0 +1,53 @@
+openapi: 3.0.1
+
+info:
+  title: Fashion MNIST
+  version: 1.0.0
+  contact:
+    name: pnelsen129
+  description: |
+    Classify image into fashion type using TensorFlow and Convolutional Neural Networks
+
+    How to use:
+    * Input the image for classification. This should be a 28x28 px grayscale image byte-encoded to Base64 and then decoded using UTF-8
+
+    Ex (Python3):
+    ```
+    with open(image_path, 'rb') as f:
+      img_bytes = f.read()
+    img_b64 = base64.b64encode(img_bytes).decode('utf8')
+    payload = json.dumps({"image": img_b64})
+    ```
+servers:
+  - url: https://main-ainize-fashion-mnist-nelsen129.endpoint.ainize.ai
+
+paths:
+  /predict:
+    post:
+      requestBody:
+        required: true
+        description: |
+          This request will classify input fashion image.
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: "28x28px grayscale image encoded to Base64 in UTF-8"
+              required:
+                - image
+      responses:
+        '200':
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: "Bad Request Error"
+        '429':
+          description: "Too many requests"
+        '500':
+          description: "Server-side Error"
