@@ -1,5 +1,4 @@
 import base64
-import io
 
 from PIL import Image
 
@@ -34,9 +33,9 @@ def main():
     # Load image as bytes, decode to TF tensor
     img_64 = request.json['image']
     img_bytes = base64.b64decode((img_64.encode('utf-8')))
-    img = Image.open(io.BytesIO(img_bytes))
+    img = Image.frombytes('L', (28, 28), img_bytes)
     img_arr = keras.utils.img_to_array(img)
-    img_arr = keras.preprocessing.image.smart_resize(img_arr, (28, 28))
+    img_arr = keras.preprocessing.image.smart_resize(img_arr, (28, 28))  # Should be unnecessary, but just to be safe
 
     prediction = predict_class(img_arr)
 
