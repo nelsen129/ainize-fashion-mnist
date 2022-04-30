@@ -1,16 +1,10 @@
+import keras
 import tensorflow as tf
-import tensorflow.keras as keras
+
+from data import load_data
 
 IMAGE_DIM = 28
 NUM_CLASSES = 10
-
-
-def load_data():
-    fashion_mnist = keras.datasets.fashion_mnist
-    (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
-    train_images = train_images / 255.
-    test_images = test_images / 255.
-    return (train_images, train_labels), (test_images, test_labels)
 
 
 def load_model(channels=128):
@@ -23,12 +17,12 @@ def load_model(channels=128):
 
 
 def train(output_path, batch_size, num_train_epochs):
-    (train_images, train_labels), (test_images, test_labels) = load_data()
+    train_dataset, test_dataset = load_data(batch_size)
     model = load_model()
     model.compile(optimizer='adam',
                   loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
-    model.fit(train_images, train_labels, validation_data=(test_images, test_labels), epochs=num_train_epochs,
+    model.fit(train_dataset, validation_data=test_dataset, epochs=num_train_epochs,
               batch_size=batch_size)
     model.save(output_path)
 
