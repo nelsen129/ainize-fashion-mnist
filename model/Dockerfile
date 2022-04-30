@@ -4,4 +4,4 @@ WORKDIR /app
 
 RUN pip install tensorflow-addons
 
-COPY /model/Fashion-MNIST ./Fashion-MNIST
+COPY Fashion-MNIST ./Fashion-MNIST
