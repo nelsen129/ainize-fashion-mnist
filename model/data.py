@@ -27,9 +27,6 @@ def color_jitter_image(image, rg=0.2):
 
 
 def augment_data(dataset):
-    # dataset = dataset.map(lambda x, y: (tf.reshape(x, [IMAGE_DIM, IMAGE_DIM, 1]), y),
-    #                       num_parallel_calls=tf.data.AUTOTUNE)
-
     dataset = dataset.map(lambda x, y: (rotate_image(x), y),
                           num_parallel_calls=tf.data.AUTOTUNE)
     dataset = dataset.map(lambda x, y: (translate_image(x), y),
@@ -38,9 +35,6 @@ def augment_data(dataset):
                           num_parallel_calls=tf.data.AUTOTUNE)
     dataset = dataset.map(lambda x, y: (color_jitter_image(x), y),
                           num_parallel_calls=tf.data.AUTOTUNE)
-
-    # dataset = dataset.map(lambda x, y: (tf.reshape(x, [IMAGE_DIM, IMAGE_DIM]), y),
-    #                       num_parallel_calls=tf.data.AUTOTUNE)
 
     return dataset
 

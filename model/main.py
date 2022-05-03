@@ -9,9 +9,23 @@ NUM_CLASSES = 10
 
 def load_model(channels=128):
     inputs = keras.Input([IMAGE_DIM, IMAGE_DIM])
-    x = keras.layers.Flatten()(inputs)
+
+    x = keras.layers.Reshape([IMAGE_DIM, IMAGE_DIM, 1])(inputs)
+    x = keras.layers.Conv2D(channels // 4, 3, activation='relu')(x)
+    x = keras.layers.MaxPooling2D(2)(x)
+    x = keras.layers.Dropout(0.25)(x)
+
+    x = keras.layers.Conv2D(channels // 2, 3, activation='relu')(x)
+    x = keras.layers.MaxPooling2D(2)(x)
+    x = keras.layers.Dropout(0.25)(x)
+
+    x = keras.layers.Conv2D(channels, 3, activation='relu')(x)
+    x = keras.layers.Dropout(0.4)(x)
+
+    x = keras.layers.Flatten()(x)
     x = keras.layers.Dense(channels, activation='relu')(x)
     x = keras.layers.Dense(NUM_CLASSES)(x)
+
     outputs = x
     return keras.Model(inputs, outputs)
 
@@ -28,7 +42,7 @@ def train(output_path, batch_size, num_train_epochs):
 
 
 def main():
-    train('Fashion-MNIST/model.h5', 32, 10)
+    train('Fashion-MNIST/model.h5', 128, 50)
 
 
 if __name__ == '__main__':
