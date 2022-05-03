@@ -1,6 +1,6 @@
 import keras
-import tensorflow as tf
 
+from argparse import ArgumentParser
 from data import load_data
 
 IMAGE_DIM = 28
@@ -42,9 +42,21 @@ def train(output_path, batch_size, num_train_epochs):
 
 
 def main():
-    train('Fashion-MNIST/model.h5', 128, 50)
+    parser = ArgumentParser()
+
+    parser.add_argument('--output', type=str, default='Fashion-MNIST/model.h5',
+                        help='Output path for saved model. Should end in .h5')
+    parser.add_argument('--channels', type=int, default=128, help='Number of channels for model')
+    parser.add_argument('--epochs', type=int, default=50, help='Number of epochs to train the model')
+
+    args = parser.parse_args()
+
+    output_path = args.output
+    channels = args.channels
+    epochs = args.epochs
+
+    train(output_path, channels, epochs)
 
 
 if __name__ == '__main__':
-    print(tf.__version__)
     main()
