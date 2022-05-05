@@ -4,7 +4,9 @@
 
 Fashion MNIST using the Ainizer platform
 
-This is the backend server for the project. You can view the frontend repo by going [here](https://github.com/nelsen129/ainize-fashion-mnist-frontend)
+This is the backend server for the project. You can view the frontend repo by going 
+[here](https://github.com/nelsen129/ainize-fashion-mnist-frontend) and you can view the frontend Ainize space by going 
+[here](https://ainize.ai/nelsen129/ainize-fashion-mnist-frontend?branch=main)
 
 ## Dataset
 
