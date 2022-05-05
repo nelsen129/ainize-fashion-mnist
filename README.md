@@ -60,17 +60,5 @@ Pass `img_b64` into the payload in the POST request
 {"prediction": Generated prediction}
 ```
 
-This prediction is an array of confidence for every category. The categories are
-
-| Label | Description |
-| --- | --- |
-| 0 | T-shirt/top |
-| 1 | Trouser |
-| 2 | Pullover |
-| 3 | Dress |
-| 4 | Coat |
-| 5 | Sandal |
-| 6 | Shirt |
-| 7 | Sneaker |
-| 8 | Bag |
-| 9 | Ankle boot |
+This prediction is the category that the model predicts. The categories are T-shirt/top, trouser, pullover, dress, 
+coat, sandal, shirt, sneaker, bag, and ankle boot

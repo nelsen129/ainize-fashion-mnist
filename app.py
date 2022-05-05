@@ -1,9 +1,10 @@
 import base64
-
-from PIL import Image
+import keras as keras
 
 from flask import Flask, request, jsonify, abort
-import tensorflow.keras as keras
+from PIL import Image
+
+categories = ['T-shirt/Top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle Boot']
 
 app = Flask(__name__)
 
@@ -15,8 +16,11 @@ def predict_class(image):
         # Generate prediction
         outputs = model(image[None, :, :])
 
-        result = dict()
-        result["prediction"] = outputs[0].numpy().tolist()
+        prediction = outputs[0].numpy().tolist()
+        max_score = max(prediction)
+        category = categories[[i for i in range(len(categories)) if prediction[i] == max_score][0]]
+        result = {"prediction": category}
+
         return jsonify(result)
 
     except Exception as e:
