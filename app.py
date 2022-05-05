@@ -24,7 +24,7 @@ def predict_class(image):
         return jsonify(result)
 
     except Exception as e:
-        print('Error occur in script generating!', e)
+        print('Error occur in image classification!', e)
         return jsonify({'error': e}), 500
 
 
