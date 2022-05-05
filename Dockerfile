@@ -1,9 +1,8 @@
 FROM pnelsen129/fashion-mnist
 
 WORKDIR /app
+COPY . /app
 
 RUN pip install -r requirements.txt
-
-COPY . /app
 
 CMD ["python3", "app.py"]
