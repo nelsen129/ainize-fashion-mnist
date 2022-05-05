@@ -2,7 +2,7 @@ FROM pnelsen129/fashion-mnist
 
 WORKDIR /app
 
-RUN pip install flask tensorflow Pillow
+RUN pip install -r requirements.txt
 
 COPY . /app
 
