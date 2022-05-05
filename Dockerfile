@@ -1,4 +1,4 @@
-FROM pnelsen129/fashion-mnist:1
+FROM pnelsen129/fashion-mnist:latest
 
 WORKDIR /app
 COPY . /app
