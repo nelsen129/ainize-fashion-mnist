@@ -18,37 +18,7 @@ cd ainize-fashion-mnist
 python3 -m pip install tensorflow==2.6.* tensorflow-addons
 ```
 
-## Model
-
-### Training
-
-```bash
-cd model
-python3 main.py [--output=OUTPUT_PATH] [--channels=CHANNELS] [--epoch=EPOCHS]
-```
-
-Args for model training
-
-
-| Arg | Default | Hint |
-| --- | --- | --- |
-| `output` | Fashion-MNIST/model.h5 | Output path for saved model. Should end in `.h5` |
-| `channels` | 128 | Number of channels for model |
-| `epochs` | 50 | Number of epochs to train the model |
-
-### Dockerizing the model
-
-After training the model, you can Dockerize it for server use
-
-```bash
-docker build -t {project-name}:{tag} .
-docker login
-docker push {project-name}:{tag}
-```
-
 ## Backend server
-
-*Note: if you train your own model, you will have to adjust the Dockerfile to point to your container*
 
 ### Setup
 
