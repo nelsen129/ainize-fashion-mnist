@@ -30,10 +30,6 @@ def predict_class(image):
 
 @app.route("/predict", methods=["POST"])
 def main():
-    print(request.json)
-    if not request.json or 'image' not in request.json:
-        abort(400)
-
     # Load image as bytes, decode to TF tensor
     try:
         img_b64 = request.form.get('image')
