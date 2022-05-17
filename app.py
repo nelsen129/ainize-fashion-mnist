@@ -25,7 +25,7 @@ def predict_class(image):
 
     except Exception as e:
         print('Error occur in image classification!', e)
-        return jsonify({'error': e}), 500
+        return jsonify({'error': e}), 400
 
 
 @app.route("/predict", methods=["POST"])
