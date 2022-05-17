@@ -35,9 +35,9 @@ def main():
         img_b64 = request.form.get('image')
 
     except Exception as e:
-        return jsonify({'message': 'Invalid request'}), 500
+        return jsonify({'message': f'Invalid request, {e}'}), 500
 
-    img_bytes = base64.b64decode((img_64.encode('utf-8')))
+    img_bytes = base64.b64decode((img_b64.encode('utf-8')))
     img = Image.frombytes('L', (28, 28), img_bytes)
     img_arr = keras.utils.img_to_array(img)
     img_arr = keras.preprocessing.image.smart_resize(img_arr, (28, 28))  # Should be unnecessary, but just to be safe
