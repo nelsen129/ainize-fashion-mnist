@@ -35,7 +35,12 @@ def main():
         abort(400)
 
     # Load image as bytes, decode to TF tensor
-    img_64 = request.json['image']
+    try:
+        img_b64 = request.form.get('image')
+
+    except Exception as e:
+        return jsonify({'message': 'Invalid request'}), 500
+
     img_bytes = base64.b64decode((img_64.encode('utf-8')))
     img = Image.frombytes('L', (28, 28), img_bytes)
     img_arr = keras.utils.img_to_array(img)

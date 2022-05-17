@@ -39,7 +39,6 @@ paths:
               type: object
               properties:
                 image:
-                  type: string
                   description: "28x28px grayscale image encoded to Base64 in UTF-8"
               required:
                 - image
