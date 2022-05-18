@@ -33,16 +33,15 @@ def main():
     # Load image as bytes, decode to TF tensor
     try:
         img_b64 = request.form.get('image')
+        img_bytes = base64.b64decode((img_b64.encode('utf-8')))
+        img = Image.frombytes('L', (28, 28), img_bytes)
+        img_arr = keras.utils.img_to_array(img)
+        img_arr = keras.preprocessing.image.smart_resize(img_arr, (28, 28))  # Should be unnecessary, but just to be safe
+
+        prediction = predict_class(img_arr)
 
     except Exception as e:
         return jsonify({'message': f'Invalid request, {e}'}), 400
-
-    img_bytes = base64.b64decode((img_b64.encode('utf-8')))
-    img = Image.frombytes('L', (28, 28), img_bytes)
-    img_arr = keras.utils.img_to_array(img)
-    img_arr = keras.preprocessing.image.smart_resize(img_arr, (28, 28))  # Should be unnecessary, but just to be safe
-
-    prediction = predict_class(img_arr)
 
     return prediction
 
